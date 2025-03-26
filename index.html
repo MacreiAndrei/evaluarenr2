@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluare Nr. 2 - Git Repository Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Source+Code+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f4f6f9;
+            --bg-secondary: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --accent-primary: #5a7eea;
+            --accent-secondary: #4cb963;
+            --border-color: #e0e6ed;
+            --shadow-subtle: rgba(99, 99, 99, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .report-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 
+                0 10px 35px -5px var(--shadow-subtle),
+                0 15px 50px -10px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .report-header {
+            background: linear-gradient(135deg, var(--accent-primary), #7a8bea);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.05);
+            transform: rotate(-45deg);
+        }
+
+        .report-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .report-content {
+            padding: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-primary);
+        }
+
+        .section-header h2 {
+            color: var(--accent-primary);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-left: 20px;
+        }
+
+        .subsection {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px -5px var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .subsection:hover {
+            transform: translateY(-5px);
+        }
+
+        .subsection-header {
+            background: #f8f9fd;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .subsection-header h3 {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .screenshot {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px -5px var(--shadow-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px -10px var(--shadow-subtle);
+        }
+
+        .code-block {
+            background: #f4f6f9;
+            padding: 20px;
+            font-family: 'Source Code Pro', monospace;
+            color: var(--text-secondary);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .conclusion {
+            background: rgba(76, 185, 99, 0.05);
+            border-left: 5px solid var(--accent-secondary);
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        .conclusion h2 {
+            color: var(--accent-secondary);
+            margin-bottom: 15px;
+        }
+
+        .conclusion ul {
+            list-style-type: none;
+        }
+
+        .conclusion li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        .conclusion li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+            font-weight: bold;
+        }
+
+        .github-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .github-link a {
+            display: inline-block;
+            background: var(--accent-primary);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(90, 126, 234, 0.4);
+        }
+
+        .github-link a:hover {
+            background: #7a8bea;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px -5px rgba(90, 126, 234, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .report-content {
+                padding: 30px;
+            }
+            .report-header {
+                padding: 30px;
+            }
+            .report-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">
+            <h1>Evaluare Nr. 2 - Git Repository Management</h1>
+        </div>
+        
+        <div class="report-content">
+            <div class="section-header">
+                <h2>I. Commit Etape</h2>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-header">
+                    <h3>1. Clonare Repository</h3>
+                </div>
+                <img class="screenshot" src="images/ClonareRepository.jpg" alt="Git Clone Repository">
+                <div class="code-block">
+                    <code>git clone https://github.com/MacreiAndrei/evaluarenr2.git</code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-header">
+                    <h3>2. Adăugare fișier settings.xml</h3>
+                </div>
+                <img class="screenshot" src="images/adaugarefisiersettings.jpg" alt="Adăugare settings.xml">
+                <div class="code-block">
+                    <code>
+git add settings.xml
+git commit -m "Commit file settings.xml"
+                    </code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-header">
+                    <h3>3. Redenumire settings.xml la configuration.xml</h3>
+                </div>
+                <img class="screenshot" src="images/Redenumiresettings.jpg" alt="Redenumire fișier">
+                <div class="code-block">
+                    <code>git mv settings.xml configuration.xml</code>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2>II. Branch Management</h2>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-header">
+                    <h3>1. Creare Branch Stage</h3>
+                </div>
+                <img class="screenshot" src="images/image4.jpg" alt="Creare Branch Stage">
+                <div class="code-block">
+                    <code>git checkout -b stage</code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-header">
+                    <h3>2. Creare Branch Dev</h3>
+                </div>
+                <img class="screenshot" src="images/image5.jpg" alt="Creare Branch Dev">
+                <div class="code-block">
+                    <code>git checkout -b dev</code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-header">
+                    <h3>3. Redenumire Branch Dev la Develop</h3>
+                </div>
+                <img class="screenshot" src="images/iamge6.jpg" alt="Redenumire Branch">
+                <div class="code-block">
+                    <code>git branch -m dev develop</code>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <h2>Concluzie</h2>
+                <p>Toate etapele cerute au fost îndeplinite cu succes, incluzând:</p>
+                <ul>
+                    <li>Crearea și gestionarea repository-ului</li>
+                    <li>Adăugarea și modificarea fișierelor</li>
+                    <li>Lucrul cu branch-uri diferite</li>
+                    <li>Actualizarea repository-ului local și remote</li>
+                </ul>
+            </div>
+
+            <div class="github-link">
+                <a href="https://github.com/MacreiAndrei/evaluarenr2">Link Repository GitHub</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
